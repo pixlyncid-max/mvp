@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('role');
             $table->string('specialty');
             $table->json('expertise')->nullable(); // array of expertise strings
-            $table->string('photo_url')->nullable();
+            $table->text('photo_url')->nullable();
             $table->integer('sort_order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
