@@ -18,6 +18,10 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
+    # Rewrite asset requests to the public directory
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(images|build|css|js|favicon-16x16\.png|favicon-32x32\.png|favicon-48x48\.png)(.*)$ public/$1$2 [L]
+
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
