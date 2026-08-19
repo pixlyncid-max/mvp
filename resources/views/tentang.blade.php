@@ -14,8 +14,7 @@
     <div class="absolute inset-0"
          style="background:linear-gradient(to top,rgba(15,19,46,.85) 0%,rgba(15,19,46,.3) 60%,transparent 100%)"></div>
     <div class="relative z-10 mx-auto max-w-container-max px-6 md:px-8 pb-20 w-full">
-        <span class="text-xs font-bold tracking-[0.2em] text-secondary uppercase">Tentang Kami</span>
-        <h1 class="font-headline text-5xl md:text-7xl lg:text-[88px] text-surface leading-[1.05] mt-4 max-w-3xl font-semibold">
+        <h1 class="font-headline text-5xl md:text-7xl lg:text-[88px] text-surface leading-[1.05] max-w-3xl font-semibold">
             Tentang Kami
         </h1>
     </div>

@@ -13,10 +13,8 @@
             style="background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(184,154,114,.1),transparent)"></div>
         <div class="mx-auto max-w-container-max px-6 md:px-8 relative z-10">
             <div class="max-w-3xl">
-                <span class="reveal text-xs font-bold tracking-[0.2em] text-secondary uppercase">Keahlian &amp;
-                    Keprofesionalan</span>
                 <h1
-                    class="reveal font-headline text-5xl md:text-7xl lg:text-[88px] text-primary leading-[1.05] tracking-tight mt-4 font-semibold">
+                    class="reveal font-headline text-5xl md:text-7xl lg:text-[88px] text-primary leading-[1.05] tracking-tight font-semibold">
                     Bertemu dengan Tim Kami
                 </h1>
                 <div class="w-12 h-px bg-secondary mt-8 mb-8"></div>

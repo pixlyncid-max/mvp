@@ -12,8 +12,6 @@
         <div class="absolute inset-0 pointer-events-none"
             style="background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(184,154,114,.12),transparent)"></div>
         <div class="mx-auto max-w-container-max px-6 md:px-8 flex flex-col items-center text-center relative z-10">
-            <span class="reveal text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-6">KEAHLIAN &amp;
-                PROFESIONALISME</span>
             <h1
                 class="reveal font-headline text-5xl md:text-7xl lg:text-[88px] text-primary leading-[1.05] tracking-tight max-w-4xl font-semibold">
                 Bidang Praktik Kami

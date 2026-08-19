@@ -11,10 +11,6 @@
 <section class="relative overflow-hidden pt-16 md:pt-28 bg-surface">
     <div class="mx-auto max-w-container-max px-6 md:px-8 text-center relative z-10">
 
-        <p class="reveal hero-eyebrow text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-6">
-            {{ $content['hero']['eyebrow'] ?? 'Integritas & Keahlian' }}
-        </p>
-
         <h1 class="reveal font-headline tracking-tight leading-[1.1]" style="font-weight:600">
             <span class="block text-5xl md:text-7xl lg:text-8xl text-primary">
                 <span class="w-anim" style="animation-delay:0ms">{{ $content['hero']['headline_1'] ?? 'Kemitraan Hukum' }}</span>

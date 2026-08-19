@@ -12,9 +12,8 @@
         <div class="absolute inset-0 pointer-events-none"
             style="background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(184,154,114,.1),transparent)"></div>
         <div class="mx-auto max-w-container-max px-6 md:px-8 relative z-10">
-            <span class="reveal text-xs font-bold tracking-[0.2em] text-secondary uppercase">Hubungi Kami</span>
             <h1
-                class="reveal font-headline text-5xl md:text-7xl lg:text-[88px] text-primary leading-[1.05] tracking-tight mt-4 max-w-3xl font-semibold">
+                class="reveal font-headline text-5xl md:text-7xl lg:text-[88px] text-primary leading-[1.05] tracking-tight max-w-3xl font-semibold">
                 Kami Siap Mendengarkan Anda
             </h1>
             <div class="w-12 h-px bg-secondary mt-8 mb-8"></div>
