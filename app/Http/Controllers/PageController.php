@@ -54,6 +54,22 @@ class PageController extends Controller
         return view('tim', compact('settings', 'team', 'content'));
     }
 
+    public function timDetail(string $slug)
+    {
+        $settings = $this->settings();
+        $member   = TeamMember::where('slug', $slug)
+            ->orWhere('id', is_numeric($slug) ? (int)$slug : 0)
+            ->where('is_active', true)
+            ->firstOrFail();
+
+        $otherMembers = TeamMember::active()
+            ->where('id', '!=', $member->id)
+            ->limit(3)
+            ->get();
+
+        return view('tim-detail', compact('settings', 'member', 'otherMembers'));
+    }
+
     public function kontak()
     {
         $settings = $this->settings();

@@ -40,7 +40,11 @@
                         </span>
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <div class="flex justify-end gap-2">
+                        <div class="flex justify-end items-center gap-2">
+                            <a href="{{ route('tim.detail', $m->slug ?: $m->id) }}" target="_blank" class="btn-secondary py-1.5 px-3 flex items-center gap-1 text-xs" title="Lihat Halaman Publik">
+                                <iconify-icon icon="solar:eye-linear"></iconify-icon>
+                                Lihat
+                            </a>
                             <a href="{{ route('admin.team.edit', $m) }}" class="btn-secondary py-1.5 px-3">
                                 Edit
                             </a>

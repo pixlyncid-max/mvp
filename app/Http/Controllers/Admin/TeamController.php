@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\TeamMember;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TeamController extends Controller
 {
@@ -22,16 +23,33 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'       => 'required|string|max:255',
-            'role'       => 'required|string|max:255',
-            'specialty'  => 'required|string|max:255',
-            'expertise'  => 'nullable|array',
-            'expertise.*'=> 'string',
-            'photo'      => 'nullable|image|max:5120',
-            'photo_url'  => 'nullable|string',
-            'sort_order' => 'integer',
-            'is_active'  => 'boolean',
+            'name'          => 'required|string|max:255',
+            'slug'          => 'nullable|string|max:255|unique:team_members,slug',
+            'role'          => 'required|string|max:255',
+            'specialty'     => 'required|string|max:255',
+            'bio'           => 'nullable|string',
+            'expertise'     => 'nullable|array',
+            'expertise.*'   => 'nullable|string',
+            'education'     => 'nullable|array',
+            'education.*'   => 'nullable|string',
+            'experience'    => 'nullable|array',
+            'experience.*'  => 'nullable|string',
+            'achievements'  => 'nullable|array',
+            'achievements.*'=> 'nullable|string',
+            'email'         => 'nullable|string|max:255',
+            'phone'         => 'nullable|string|max:255',
+            'linkedin'      => 'nullable|string|max:255',
+            'photo'         => 'nullable|image|max:5120',
+            'photo_url'     => 'nullable|string',
+            'sort_order'    => 'integer',
+            'is_active'     => 'boolean',
         ]);
+
+        if (empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['name']);
+        } else {
+            $data['slug'] = Str::slug($data['slug']);
+        }
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
@@ -40,8 +58,11 @@ class TeamController extends Controller
             $data['photo_url'] = asset('images/team/' . $filename);
         }
 
-        $data['expertise'] = array_filter($data['expertise'] ?? []);
-        $data['is_active'] = $request->boolean('is_active', true);
+        $data['expertise']    = array_values(array_filter($data['expertise'] ?? [], fn($v) => trim((string)$v) !== ''));
+        $data['education']    = array_values(array_filter($data['education'] ?? [], fn($v) => trim((string)$v) !== ''));
+        $data['experience']   = array_values(array_filter($data['experience'] ?? [], fn($v) => trim((string)$v) !== ''));
+        $data['achievements'] = array_values(array_filter($data['achievements'] ?? [], fn($v) => trim((string)$v) !== ''));
+        $data['is_active']    = $request->boolean('is_active', true);
 
         // Remove photo from data as it's not a database field
         unset($data['photo']);
@@ -60,16 +81,33 @@ class TeamController extends Controller
     public function update(Request $request, TeamMember $team)
     {
         $data = $request->validate([
-            'name'       => 'required|string|max:255',
-            'role'       => 'required|string|max:255',
-            'specialty'  => 'required|string|max:255',
-            'expertise'  => 'nullable|array',
-            'expertise.*'=> 'string',
-            'photo'      => 'nullable|image|max:5120',
-            'photo_url'  => 'nullable|string',
-            'sort_order' => 'integer',
-            'is_active'  => 'boolean',
+            'name'          => 'required|string|max:255',
+            'slug'          => 'nullable|string|max:255|unique:team_members,slug,' . $team->id,
+            'role'          => 'required|string|max:255',
+            'specialty'     => 'required|string|max:255',
+            'bio'           => 'nullable|string',
+            'expertise'     => 'nullable|array',
+            'expertise.*'   => 'nullable|string',
+            'education'     => 'nullable|array',
+            'education.*'   => 'nullable|string',
+            'experience'    => 'nullable|array',
+            'experience.*'  => 'nullable|string',
+            'achievements'  => 'nullable|array',
+            'achievements.*'=> 'nullable|string',
+            'email'         => 'nullable|string|max:255',
+            'phone'         => 'nullable|string|max:255',
+            'linkedin'      => 'nullable|string|max:255',
+            'photo'         => 'nullable|image|max:5120',
+            'photo_url'     => 'nullable|string',
+            'sort_order'    => 'integer',
+            'is_active'     => 'boolean',
         ]);
+
+        if (empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['name']);
+        } else {
+            $data['slug'] = Str::slug($data['slug']);
+        }
 
         if ($request->hasFile('photo')) {
             // Delete old local file if exists
@@ -86,8 +124,11 @@ class TeamController extends Controller
             $data['photo_url'] = asset('images/team/' . $filename);
         }
 
-        $data['expertise'] = array_filter($data['expertise'] ?? []);
-        $data['is_active'] = $request->boolean('is_active');
+        $data['expertise']    = array_values(array_filter($data['expertise'] ?? [], fn($v) => trim((string)$v) !== ''));
+        $data['education']    = array_values(array_filter($data['education'] ?? [], fn($v) => trim((string)$v) !== ''));
+        $data['experience']   = array_values(array_filter($data['experience'] ?? [], fn($v) => trim((string)$v) !== ''));
+        $data['achievements'] = array_values(array_filter($data['achievements'] ?? [], fn($v) => trim((string)$v) !== ''));
+        $data['is_active']    = $request->boolean('is_active');
 
         // Remove photo from data as it's not a database field
         unset($data['photo']);

@@ -12,11 +12,12 @@ use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 // ─── Public Pages ─────────────────────────────────────────────────────────────
-Route::get('/',         [PageController::class, 'home'])->name('home');
-Route::get('/layanan',  [PageController::class, 'layanan'])->name('layanan');
-Route::get('/tentang',  [PageController::class, 'tentang'])->name('tentang');
-Route::get('/tim',      [PageController::class, 'tim'])->name('tim');
-Route::get('/kontak',   [PageController::class, 'kontak'])->name('kontak');
+Route::get('/',            [PageController::class, 'home'])->name('home');
+Route::get('/layanan',     [PageController::class, 'layanan'])->name('layanan');
+Route::get('/tentang',     [PageController::class, 'tentang'])->name('tentang');
+Route::get('/tim',         [PageController::class, 'tim'])->name('tim');
+Route::get('/tim/{slug}',  [PageController::class, 'timDetail'])->name('tim.detail');
+Route::get('/kontak',      [PageController::class, 'kontak'])->name('kontak');
 
 // ─── Admin Auth ───────────────────────────────────────────────────────────────
 Route::prefix('admin')->name('admin.')->group(function () {

@@ -259,23 +259,25 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @foreach($team as $m)
-            <article class="reveal group rounded-[32px] bg-white border border-primary/5 overflow-hidden grad-border transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
-                <div class="aspect-[4/5] overflow-hidden">
-                    <img alt="{{ $m->name }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="{{ $m->photo_url }}">
-                </div>
-                <div class="p-8 text-center">
-                    <h4 class="font-headline text-2xl text-primary">{{ $m->name }}</h4>
-                    <p class="text-xs font-bold text-secondary uppercase tracking-widest mt-2 mb-6">{{ $m->role }}</p>
-                    <div class="flex justify-center gap-4">
-                        <a class="w-10 h-10 rounded-full border border-primary/10 flex items-center justify-center text-primary/40 hover:text-secondary hover:border-secondary transition-colors" href="#">
-                            <iconify-icon icon="solar:link-linear"></iconify-icon>
-                        </a>
-                        <a class="w-10 h-10 rounded-full border border-primary/10 flex items-center justify-center text-primary/40 hover:text-secondary hover:border-secondary transition-colors" href="#">
-                            <iconify-icon icon="solar:letter-linear"></iconify-icon>
-                        </a>
+            <a href="{{ route('tim.detail', $m->slug ?: $m->id) }}" class="block group">
+                <article class="reveal h-full rounded-[32px] bg-white border border-primary/5 overflow-hidden grad-border transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between cursor-pointer">
+                    <div>
+                        <div class="aspect-[4/5] overflow-hidden bg-gray-100">
+                            <img alt="{{ $m->name }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="{{ $m->photo_url }}">
+                        </div>
+                        <div class="p-8 text-center">
+                            <h4 class="font-headline text-2xl text-primary font-semibold group-hover:text-secondary transition-colors">{{ $m->name }}</h4>
+                            <p class="text-xs font-bold text-secondary uppercase tracking-widest mt-2 mb-2">{{ $m->role }}</p>
+                            <p class="text-sm text-on-surface-variant">{{ $m->specialty }}</p>
+                        </div>
                     </div>
-                </div>
-            </article>
+                    <div class="px-8 pb-8 pt-0 flex items-center justify-center text-xs font-bold uppercase tracking-wider text-primary/60 group-hover:text-secondary transition-colors">
+                        <span class="inline-flex items-center gap-1">
+                            Lihat Profil <iconify-icon icon="solar:arrow-right-linear" class="text-base transition-transform group-hover:translate-x-1"></iconify-icon>
+                        </span>
+                    </div>
+                </article>
+            </a>
             @endforeach
         </div>
         <div class="text-center mt-16">
