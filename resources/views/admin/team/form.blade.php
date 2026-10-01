@@ -32,6 +32,16 @@
                 </div>
 
                 <div>
+                    <label class="form-label" for="category">Kategori Tim <span class="text-red-500">*</span></label>
+                    <select id="category" name="category" class="form-input">
+                        <option value="partner" {{ old('category', $member->category_slug ?? 'partner') === 'partner' ? 'selected' : '' }}>PARTNER</option>
+                        <option value="associate" {{ old('category', $member->category_slug ?? '') === 'associate' ? 'selected' : '' }}>ASSOCIATE</option>
+                        <option value="support" {{ old('category', $member->category_slug ?? '') === 'support' ? 'selected' : '' }}>SUPPORT</option>
+                    </select>
+                    @error('category') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                </div>
+
+                <div>
                     <label class="form-label" for="specialty">Spesialisasi Hukum <span class="text-red-500">*</span></label>
                     <input type="text" id="specialty" name="specialty" value="{{ old('specialty', $member->specialty) }}" required class="form-input" placeholder="e.g. Hukum Korporasi dan Bisnis">
                     @error('specialty') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror

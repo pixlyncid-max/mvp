@@ -257,27 +257,46 @@
             <p class="reveal text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">{{ $content['team']['eyebrow'] ?? 'Pakar Kami' }}</p>
             <h2 class="reveal font-headline text-4xl md:text-6xl text-primary">{{ $content['team']['headline'] ?? 'Tim Advokat Profesional' }}</h2>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- CATEGORY TABS NAVBAR WITH FRAMER MOTION INDICATOR -->
+        <div class="team-category-nav flex justify-center items-center mb-16">
+            <div class="relative inline-flex items-center gap-8 md:gap-14 border-b border-primary/10 pb-4 text-xs md:text-sm font-bold tracking-[0.2em] uppercase">
+                <button type="button" data-team-category="partner" class="team-cat-tab active text-primary transition-colors py-1 cursor-pointer">
+                    PARTNER
+                </button>
+                <button type="button" data-team-category="associate" class="team-cat-tab text-primary/40 hover:text-primary transition-colors py-1 cursor-pointer">
+                    ASSOCIATE
+                </button>
+                <button type="button" data-team-category="support" class="team-cat-tab text-primary/40 hover:text-primary transition-colors py-1 cursor-pointer">
+                    SUPPORT
+                </button>
+                <!-- FRAMER MOTION ACTIVE SLIDING INDICATOR BAR -->
+                <span class="team-cat-indicator absolute bottom-0 h-[2px] bg-secondary pointer-events-none rounded-full"></span>
+            </div>
+        </div>
+
+        <div class="team-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[400px]">
             @foreach($team as $m)
-            <a href="{{ route('tim.detail', $m->slug ?: $m->id) }}" class="block group">
-                <article class="reveal h-full rounded-[32px] bg-white border border-primary/5 overflow-hidden grad-border transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between cursor-pointer">
-                    <div>
-                        <div class="aspect-[4/5] overflow-hidden bg-gray-100">
-                            <img alt="{{ $m->name }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="{{ $m->photo_url }}">
+            <div class="team-card-item transition-all duration-300" data-category="{{ $m->category_slug }}">
+                <a href="{{ route('tim.detail', $m->slug ?: $m->id) }}" class="block group h-full">
+                    <article class="reveal h-full rounded-[32px] bg-white border border-primary/5 overflow-hidden grad-border transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between cursor-pointer">
+                        <div>
+                            <div class="aspect-[4/5] overflow-hidden bg-gray-100 relative">
+                                <img alt="{{ $m->name }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="{{ $m->photo_url }}">
+                            </div>
+                            <div class="p-8 text-center">
+                                <h4 class="font-headline text-2xl text-primary font-semibold group-hover:text-secondary transition-colors">{{ $m->name }}</h4>
+                                <p class="text-xs font-bold text-secondary uppercase tracking-widest mt-2 mb-2">{{ $m->role }}</p>
+                                <p class="text-sm text-on-surface-variant">{{ $m->specialty }}</p>
+                            </div>
                         </div>
-                        <div class="p-8 text-center">
-                            <h4 class="font-headline text-2xl text-primary font-semibold group-hover:text-secondary transition-colors">{{ $m->name }}</h4>
-                            <p class="text-xs font-bold text-secondary uppercase tracking-widest mt-2 mb-2">{{ $m->role }}</p>
-                            <p class="text-sm text-on-surface-variant">{{ $m->specialty }}</p>
+                        <div class="px-8 pb-8 pt-0 flex items-center justify-center text-xs font-bold uppercase tracking-wider text-primary/60 group-hover:text-secondary transition-colors">
+                            <span class="inline-flex items-center gap-1">
+                                Lihat Profil <iconify-icon icon="solar:arrow-right-linear" class="text-base transition-transform group-hover:translate-x-1"></iconify-icon>
+                            </span>
                         </div>
-                    </div>
-                    <div class="px-8 pb-8 pt-0 flex items-center justify-center text-xs font-bold uppercase tracking-wider text-primary/60 group-hover:text-secondary transition-colors">
-                        <span class="inline-flex items-center gap-1">
-                            Lihat Profil <iconify-icon icon="solar:arrow-right-linear" class="text-base transition-transform group-hover:translate-x-1"></iconify-icon>
-                        </span>
-                    </div>
-                </article>
-            </a>
+                    </article>
+                </a>
+            </div>
             @endforeach
         </div>
         <div class="text-center mt-16">

@@ -20,7 +20,7 @@ class PageController extends Controller
     {
         $settings     = $this->settings();
         $services     = Service::active()->get();
-        $team         = TeamMember::active()->limit(3)->get();
+        $team         = TeamMember::active()->get();
         $testimonials = Testimonial::active()->get();
         $content      = PageContent::forPage('home');
 

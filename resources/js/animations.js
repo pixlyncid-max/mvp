@@ -361,6 +361,120 @@ function initTimeline() {
     });
 }
 
+// ─── 12. TEAM CATEGORY FILTER WITH FRAMER MOTION ────────────────────────────
+function initTeamCategoryFilter() {
+    const navs = document.querySelectorAll('.team-category-nav');
+    if (!navs.length) return;
+
+    navs.forEach(nav => {
+        const tabs = nav.querySelectorAll('.team-cat-tab');
+        const indicator = nav.querySelector('.team-cat-indicator');
+        const section = nav.closest('section') || document;
+        const items = Array.from(section.querySelectorAll('.team-card-item'));
+
+        if (!tabs.length || !indicator) return;
+
+        const navWrapper = nav.querySelector('.relative.inline-flex');
+
+        function positionIndicator(targetTab, immediate = false) {
+            if (!targetTab || !navWrapper) return;
+            const tabRect = targetTab.getBoundingClientRect();
+            const navRect = navWrapper.getBoundingClientRect();
+
+            const left = tabRect.left - navRect.left;
+            const width = tabRect.width;
+
+            if (immediate || reduced) {
+                indicator.style.left = `${left}px`;
+                indicator.style.width = `${width}px`;
+            } else {
+                animate(
+                    indicator,
+                    { left: `${left}px`, width: `${width}px` },
+                    { duration: 0.35, ease: [0.22, 1, 0.36, 1] }
+                );
+            }
+        }
+
+        function filterCategory(cat, clickedTab) {
+            tabs.forEach(t => {
+                t.classList.remove('active', 'text-primary');
+                t.classList.add('text-primary/40');
+            });
+            clickedTab.classList.add('active', 'text-primary');
+            clickedTab.classList.remove('text-primary/40');
+
+            positionIndicator(clickedTab);
+
+            const catLower = cat.toLowerCase();
+            const matchingItems = [];
+
+            items.forEach(item => {
+                const itemCat = (item.dataset.category || '').toLowerCase();
+                const isMatch = catLower === 'all' || itemCat === catLower;
+
+                if (isMatch) {
+                    matchingItems.push(item);
+                } else {
+                    if (item.style.display !== 'none') {
+                        if (reduced) {
+                            item.style.display = 'none';
+                        } else {
+                            animate(
+                                item,
+                                { opacity: [1, 0], scale: [1, 0.94], y: [0, 16] },
+                                { duration: 0.22, ease: [0.22, 1, 0.36, 1] }
+                            ).then(() => {
+                                item.style.display = 'none';
+                            });
+                        }
+                    }
+                }
+            });
+
+            matchingItems.forEach(item => {
+                item.style.display = 'block';
+            });
+
+            if (!reduced && matchingItems.length) {
+                matchingItems.forEach(item => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(28px) scale(0.96)';
+                });
+
+                animate(
+                    matchingItems,
+                    { opacity: [0, 1], y: [28, 0], scale: [0.96, 1] },
+                    {
+                        duration: 0.45,
+                        delay: stagger(0.07, { startDelay: 0.05 }),
+                        ease: [0.22, 1, 0.36, 1],
+                    }
+                );
+            }
+        }
+
+        const initialActive = nav.querySelector('.team-cat-tab.active') || tabs[0];
+        if (initialActive) {
+            setTimeout(() => {
+                positionIndicator(initialActive, true);
+                filterCategory(initialActive.dataset.teamCategory, initialActive);
+            }, 60);
+        }
+
+        window.addEventListener('resize', () => {
+            const currentActive = nav.querySelector('.team-cat-tab.active');
+            if (currentActive) positionIndicator(currentActive, true);
+        });
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterCategory(tab.dataset.teamCategory, tab);
+            });
+        });
+    });
+}
+
 // ─── INIT ALL ─────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     initHeroEntrance();
@@ -374,4 +488,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initAccordionAnimations();
     initScrollProgressBar();
     initTimeline();
+    initTeamCategoryFilter();
 });

@@ -32,49 +32,68 @@
                             ══════════════════════════════════════════════════════════════════════ -->
     <section class="bg-[#F9F7F8] py-section-gap">
         <div class="mx-auto max-w-container-max px-6 md:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach($team as $m)
-                    <a href="{{ route('tim.detail', $m->slug ?: $m->id) }}" class="block group">
-                        <article
-                            class="reveal h-full rounded-[32px] bg-white border border-primary/5 overflow-hidden grad-border hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 flex flex-col justify-between cursor-pointer">
-                            <div>
-                                <div class="aspect-[4/5] overflow-hidden relative bg-gray-100">
-                                    <img alt="{{ $m->name }}"
-                                        class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                                        src="{{ $m->photo_url }}">
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                    </div>
+            <!-- CATEGORY TABS NAVBAR WITH FRAMER MOTION INDICATOR -->
+            <div class="team-category-nav flex justify-center items-center mb-16">
+                <div class="relative inline-flex items-center gap-8 md:gap-14 border-b border-primary/10 pb-4 text-xs md:text-sm font-bold tracking-[0.2em] uppercase">
+                    <button type="button" data-team-category="partner" class="team-cat-tab active text-primary transition-colors py-1 cursor-pointer">
+                        PARTNER
+                    </button>
+                    <button type="button" data-team-category="associate" class="team-cat-tab text-primary/40 hover:text-primary transition-colors py-1 cursor-pointer">
+                        ASSOCIATE
+                    </button>
+                    <button type="button" data-team-category="support" class="team-cat-tab text-primary/40 hover:text-primary transition-colors py-1 cursor-pointer">
+                        SUPPORT
+                    </button>
+                    <!-- FRAMER MOTION ACTIVE SLIDING INDICATOR BAR -->
+                    <span class="team-cat-indicator absolute bottom-0 h-[2px] bg-secondary pointer-events-none rounded-full"></span>
+                </div>
+            </div>
 
-                                    @if($m->expertise && count($m->expertise) > 0)
+            <div class="team-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[400px]">
+                @foreach($team as $m)
+                    <div class="team-card-item transition-all duration-300" data-category="{{ $m->category_slug }}">
+                        <a href="{{ route('tim.detail', $m->slug ?: $m->id) }}" class="block group h-full">
+                            <article
+                                class="reveal h-full rounded-[32px] bg-white border border-primary/5 overflow-hidden grad-border hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 flex flex-col justify-between cursor-pointer">
+                                <div>
+                                    <div class="aspect-[4/5] overflow-hidden relative bg-gray-100">
+                                        <img alt="{{ $m->name }}"
+                                            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                            src="{{ $m->photo_url }}">
                                         <div
-                                            class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-10">
-                                            <ul class="space-y-1.5">
-                                                @foreach($m->expertise as $e)
-                                                    @if(trim($e) !== '')
-                                                        <li
-                                                            class="text-xs font-bold text-secondary uppercase tracking-widest flex items-center gap-2">
-                                                            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> {{ $e }}
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
+                                            class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                                         </div>
-                                    @endif
+
+                                        @if($m->expertise && count($m->expertise) > 0)
+                                            <div
+                                                class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-10">
+                                                <ul class="space-y-1.5">
+                                                    @foreach($m->expertise as $e)
+                                                        @if(trim($e) !== '')
+                                                            <li
+                                                                class="text-xs font-bold text-secondary uppercase tracking-widest flex items-center gap-2">
+                                                                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> {{ $e }}
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="p-8">
+                                        <span class="text-xs font-bold text-secondary uppercase tracking-widest">{{ $m->role }}</span>
+                                        <h2 class="font-headline text-xl text-primary mt-1 mb-1 font-semibold group-hover:text-secondary transition-colors">{{ $m->name }}</h2>
+                                        <p class="text-sm text-on-surface-variant mb-0">{{ $m->specialty }}</p>
+                                    </div>
                                 </div>
-                                <div class="p-8">
-                                    <span class="text-xs font-bold text-secondary uppercase tracking-widest">{{ $m->role }}</span>
-                                    <h2 class="font-headline text-xl text-primary mt-1 mb-1 font-semibold group-hover:text-secondary transition-colors">{{ $m->name }}</h2>
-                                    <p class="text-sm text-on-surface-variant mb-0">{{ $m->specialty }}</p>
+                                
+                                <div class="px-8 pb-8 pt-0 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-primary/60 group-hover:text-secondary transition-colors border-t border-transparent group-hover:border-primary/5">
+                                    <span>Lihat Profil Lengkap</span>
+                                    <iconify-icon icon="solar:arrow-right-linear" class="text-base transition-transform group-hover:translate-x-1"></iconify-icon>
                                 </div>
-                            </div>
-                            
-                            <div class="px-8 pb-8 pt-0 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-primary/60 group-hover:text-secondary transition-colors border-t border-transparent group-hover:border-primary/5">
-                                <span>Lihat Profil Lengkap</span>
-                                <iconify-icon icon="solar:arrow-right-linear" class="text-base transition-transform group-hover:translate-x-1"></iconify-icon>
-                            </div>
-                        </article>
-                    </a>
+                            </article>
+                        </a>
+                    </div>
                 @endforeach
             </div>
         </div>

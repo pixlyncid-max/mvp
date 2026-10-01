@@ -11,6 +11,7 @@ class TeamMember extends Model
         'name',
         'slug',
         'role',
+        'category',
         'specialty',
         'bio',
         'expertise',
@@ -52,6 +53,24 @@ class TeamMember extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true)->orderBy('sort_order');
+    }
+
+    public function getCategorySlugAttribute(): string
+    {
+        $cat = strtolower(trim($this->category ?? ''));
+        if (!empty($cat)) {
+            if (str_contains($cat, 'partner')) return 'partner';
+            if (str_contains($cat, 'associate')) return 'associate';
+            if (str_contains($cat, 'support')) return 'support';
+            return $cat;
+        }
+
+        $role = strtolower($this->role ?? '');
+        if (str_contains($role, 'partner')) return 'partner';
+        if (str_contains($role, 'associate')) return 'associate';
+        if (str_contains($role, 'support') || str_contains($role, 'staff') || str_contains($role, 'paralegal') || str_contains($role, 'admin') || str_contains($role, 'assistant')) return 'support';
+
+        return 'partner';
     }
 
     public function getUrlAttribute(): string
