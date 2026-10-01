@@ -241,9 +241,24 @@ function initCounters() {
     });
 }
 
-// ─── 8. HERO SECTION ENTRANCE ────────────────────────────────────────────────
+// ─── 8. HERO SECTION ENTRANCE FOR ALL PAGES ─────────────────────────────────
 function initHeroEntrance() {
     if (reduced) return;
+
+    // Animate hero titles (h1) across all pages
+    const pageTitles = document.querySelectorAll('h1');
+    if (pageTitles.length) {
+        pageTitles.forEach(title => {
+            if (title.classList.contains('w-anim-processed')) return;
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(30px)';
+            animate(
+                title,
+                { opacity: [0, 1], y: [30, 0] },
+                { duration: 0.85, delay: 0.1, ease: [0.22, 1, 0.36, 1] }
+            );
+        });
+    }
 
     // Animate the hero mockup card in
     const mockup = document.querySelector('.hero-mockup');
@@ -256,12 +271,12 @@ function initHeroEntrance() {
     }
 
     // Animate hero eyebrow label
-    const eyebrow = document.querySelector('.hero-eyebrow');
-    if (eyebrow) {
+    const eyebrow = document.querySelectorAll('.hero-eyebrow, nav.text-xs');
+    if (eyebrow.length) {
         animate(
             eyebrow,
             { opacity: [0, 1], y: [20, 0] },
-            { duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }
+            { duration: 0.6, delay: 0.05, ease: [0.22, 1, 0.36, 1] }
         );
     }
 
@@ -273,10 +288,22 @@ function initHeroEntrance() {
             { opacity: [0, 1], y: [20, 0] },
             {
                 duration: 0.6,
-                delay: stagger(0.12, { startDelay: 0.7 }),
+                delay: stagger(0.12, { startDelay: 0.5 }),
                 ease: [0.22, 1, 0.36, 1],
             }
         );
+    }
+
+    // Gentle floating loop animation for floating elements (.float-anim, quote icons, experience badges)
+    const floaters = document.querySelectorAll('.float-anim, iconify-icon[icon*="quote"], .absolute.-bottom-8');
+    if (floaters.length) {
+        floaters.forEach(el => {
+            animate(
+                el,
+                { y: [-5, 5] },
+                { duration: 3.2, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }
+            );
+        });
     }
 }
 
