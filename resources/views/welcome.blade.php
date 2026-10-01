@@ -148,7 +148,6 @@
     <div class="mx-auto max-w-container-max px-6 md:px-8">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div class="max-w-2xl">
-                <p class="reveal text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">{{ $content['services']['eyebrow'] ?? 'Keahlian Kami' }}</p>
                 <h2 class="reveal font-headline text-4xl md:text-6xl text-primary leading-tight">{{ $content['services']['headline'] ?? 'Layanan Hukum Profesional' }}</h2>
             </div>
             <div class="flex gap-3">
@@ -199,7 +198,6 @@
 
         <div class="space-y-10">
             <div>
-                <p class="reveal text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">{{ $content['about']['eyebrow'] ?? 'Tentang Kami' }}</p>
                 <h2 class="reveal font-headline text-4xl md:text-5xl lg:text-6xl text-primary leading-tight font-semibold">
                     {{ $content['about']['headline'] ?? 'Melindungi Hak Anda dengan Integritas' }}
                 </h2>
@@ -253,8 +251,7 @@
 ══════════════════════════════════════════════════════════════════════ -->
 <section class="bg-[#F9F7F8] py-section-gap" id="tim">
     <div class="mx-auto max-w-container-max px-6 md:px-8">
-        <div class="text-center mb-20">
-            <p class="reveal text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">{{ $content['team']['eyebrow'] ?? 'Pakar Kami' }}</p>
+        <div class="text-center mb-16">
             <h2 class="reveal font-headline text-4xl md:text-6xl text-primary">{{ $content['team']['headline'] ?? 'Tim Advokat Profesional' }}</h2>
         </div>
         <!-- CATEGORY TABS NAVBAR WITH FRAMER MOTION INDICATOR -->
@@ -318,7 +315,6 @@
         <div class="grid lg:grid-cols-2 gap-20 items-center">
 
             <div class="reveal">
-                <p class="text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-6">{{ $content['testimonials']['eyebrow'] ?? 'Pengalaman Klien' }}</p>
                 <h2 class="font-headline text-4xl md:text-6xl text-surface leading-tight">{{ $content['testimonials']['headline'] ?? 'Apa Kata Klien Kami' }}</h2>
                 <div class="mt-12 space-y-4">
                     @foreach($testimonials as $i => $t)

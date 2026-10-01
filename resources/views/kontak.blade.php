@@ -254,7 +254,6 @@
         <div class="mx-auto max-w-container-max px-6 md:px-8">
             <div class="grid lg:grid-cols-2 gap-20 items-start">
                 <div>
-                    <p class="reveal text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">Pertanyaan Umum</p>
                     <h2 class="reveal font-headline text-4xl md:text-5xl text-primary leading-tight font-semibold">
                         Yang Sering Ditanyakan
                     </h2>

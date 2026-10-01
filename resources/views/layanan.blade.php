@@ -69,7 +69,6 @@
     <section class="bg-surface py-section-gap">
         <div class="mx-auto max-w-container-max px-6 md:px-8">
             <div class="text-center mb-20">
-                <p class="reveal text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">Cara Kerja Kami</p>
                 <h2 class="reveal font-headline text-4xl md:text-6xl text-primary font-semibold">Pendampingan Hukum dalam
                     Empat Tahap</h2>
             </div>

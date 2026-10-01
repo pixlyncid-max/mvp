@@ -110,7 +110,6 @@
 
             <div class="reveal space-y-10">
                 <div>
-                    <p class="text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">BUDAYA KERJA KAMI</p>
                     <h2 class="font-headline text-4xl md:text-5xl text-surface leading-tight font-semibold">
                         Membangun Kepercayaan Melalui Profesionalisme dan Integritas
                     </h2>
@@ -163,7 +162,6 @@
                             ══════════════════════════════════════════════════════════════════════ -->
     <section class="bg-[#F9F7F8] py-24">
         <div class="mx-auto max-w-container-max px-6 md:px-8 text-center">
-            <p class="reveal text-xs font-bold tracking-[0.2em] text-secondary uppercase mb-4">Diskusi dengan Tim</p>
             <h2 class="reveal font-headline text-4xl md:text-6xl text-primary mb-8 font-semibold">Siap Berdiskusi dengan Tim
                 Kami?</h2>
             <p class="reveal text-lg text-on-surface-variant max-w-xl mx-auto mb-12 leading-relaxed">
